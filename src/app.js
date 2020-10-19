@@ -27,6 +27,12 @@ app.configure(configuration())
 app.configure(logger)
 app.set('mongodb', process.env.MONGODB)
 
+const shopConfig = app.get('shop')
+shopConfig.admin.name = process.env.SHOP_ADMIN_NAME || shopConfig.admin.name
+shopConfig.admin.email = process.env.SHOP_ADMIN_EMAIL || shopConfig.admin.email
+shopConfig.admin.password = process.env.SHOP_ADMIN_PASSWORD || shopConfig.admin.password
+app.set('shop', shopConfig)
+
 const authConfig = app.get('authentication')
 authConfig.secret = process.env.AUTH_SECRET
 authConfig.jwtOptions.audience = process.env.JWT_AUDIENCE
