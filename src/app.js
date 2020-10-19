@@ -156,10 +156,34 @@ const createInitialUser = async () => {
       })
     }
   } catch (err) {
-    logger.error('an error', err.toString())
+    logger.error('Error creating initial admin user', err.toString())
+  }
+}
+
+const createInitialSettings = async () => {
+  const { logger } = app.locals.settings
+
+  try {
+    const settings = await app.service('settings').find({
+      query: {
+        $limit: 0
+      }
+    })
+
+    if (settings.total === 0) {
+      const defaultSettings = app.get('settings')
+      logger.warn('No settings are defined; using defaults')
+
+      defaultSettings.forEach(async setting => {
+        await app.service('settings').create(setting)
+      })
+    }
+  } catch (err) {
+    logger.error('Error creating default settings', err.toString())
   }
 }
 
 createInitialUser()
+createInitialSettings()
 
 module.exports = app
