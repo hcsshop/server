@@ -100,5 +100,61 @@
         "secret": "<github oauth secret>"
       }
     }
-  }
+  },
+
+  "settings": [
+    {
+      "key": "appointments.enabled",
+      "title": "Appointments Enabled",
+      "type": "boolean",
+      "category": "Appointments",
+      "comment": "Toggle appointment functionality",
+      "enabled": true
+    },
+
+    {
+      "key": "appointments.origin",
+      "title": "Appointment Origin Address",
+      "type": "text",
+      "category": "Appointments",
+      "comment": "The origin address to use when calculating distance to destinations",
+      "text": ""
+    },
+
+    {
+      "key": "orders.logoURL",
+      "title": "Order Logo URL",
+      "type": "text",
+      "category": "Orders",
+      "comment": "This is either a URL or a DataURI with the logo to display on order documents",
+      "text": "https://raw.githubusercontent.com/OpenRepairShop/server/master/.github/logo-text.png"
+    },
+
+    {
+      "key": "particles.enabled",
+      "title": "Particle Backround Effect (Global)",
+      "type": "boolean",
+      "category": "Other",
+      "comment": "Toggle the particle background effect for all users",
+      "enabled": true
+    },
+
+    {
+      "key": "sound.effects.enabled",
+      "title": "Sound Effects",
+      "type": "boolean",
+      "category": "Other",
+      "comment": "Toggle sound effects for all users",
+      "enabled": true
+    },
+
+    {
+      "key": "quickbooks.enabled",
+      "title": "Quickbooks Integration",
+      "type": "boolean",
+      "category": "Other",
+      "comment": "Toggle integration with Quickbooks",
+      "enabled": false
+    }
+  ]
 }
