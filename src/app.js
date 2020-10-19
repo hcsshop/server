@@ -166,7 +166,7 @@ const createInitialSettings = async () => {
   try {
     const settings = await app.service('settings').find({
       query: {
-        $limit: 0
+        $limit: -1
       }
     })
 
