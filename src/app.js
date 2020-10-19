@@ -169,6 +169,8 @@ const createInitialSettings = async () => {
         $limit: 0
       }
     })
+    
+    console.log(settings)
 
     if (settings.total === 0) {
       const defaultSettings = app.get('settings')
