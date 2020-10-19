@@ -172,7 +172,7 @@ const createInitialSettings = async () => {
     
     console.log(settings)
 
-    if (settings.total === 0) {
+    if (settings.length === 0) {
       const defaultSettings = app.get('settings')
       logger.warn('No settings are defined; using defaults')
 
