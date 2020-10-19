@@ -1,6 +1,6 @@
 {
-  "name": "onrepairshop",
-  "description": "An extensible CRM ecosystem for businesses",
+  "name": "openrepairshop",
+  "description": "A customizable service shop solution for tracking Customers, Appointments, Work Orders, and more",
 
   "addons": [
 
