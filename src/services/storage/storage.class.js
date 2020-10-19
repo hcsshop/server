@@ -6,7 +6,7 @@ exports.Storage = class Storage extends Service {
     this.logger = app.get('logger')
     this.app = app
 
-    this.defaultStorageType = process.env.DEFAULT_FILE_STORAGE_TYPE || this.options.storage.general.defaultStorageType || 'super'
+    this.defaultStorageType = process.env.DEFAULT_FILE_STORAGE_TYPE || this.options.storage.general.defaultStorageType || 'database'
     this.folderKeyPrefix = process.env.DEFAULT_FILE_STORAGE_FOLDER_PREFIX || this.options.storage.general.folderKeyPrefix || ''
 
     this.createS3 = async ({ id, datauri }) => {
@@ -23,7 +23,7 @@ exports.Storage = class Storage extends Service {
     let result // eslint-disable-line
 
     switch (storageType || this.defaultStorageType) {
-      case 'super':
+      case 'database':
         return await super.create({
           fileType,
           storageType,
@@ -58,12 +58,17 @@ exports.Storage = class Storage extends Service {
 
   async get (id, params) {
     const { storageType = this.defaultStorageType } = params.query
-    console.log({ query: params.query })
     const result = await super.get(id, params)
 
     switch (storageType) {
+      case 'database':
+        result.data = { uri: result.datauri }
+        break
       case 's3':
         result.data = await this.app.service('storage-s3').get(result.keys.s3)
+        break
+      default:
+        console.error('Invalid storage type')
     }
 
     return result

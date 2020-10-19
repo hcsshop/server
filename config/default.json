@@ -38,7 +38,7 @@
 
   "storage": {
     "general": {
-      "defaultStorageType": "s3"
+      "defaultStorageType": "database"
     }
   },
 
