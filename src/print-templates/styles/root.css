@@ -1,0 +1,17 @@
+@page { size: letter }
+i { margin-right: 15px }
+hr { background-color: #ccc }
+.card { border-color: black !important }
+.card-header { background-color: #ccc; font-weight: bold; }
+.logo { max-height: 1.5in }
+
+.rating {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+}
+
+.rating > span {
+  display: inline-block;
+  position: relative;
+  width: 1.1em;
+}

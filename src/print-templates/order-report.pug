@@ -1,0 +1,39 @@
+include components/styles
+include components/header
+include components/customer
+include components/machines
+include components/accessories
+include components/parts
+
+html
+  head
+    +styles
+
+  body.letter
+    section.sheet.padding-10mm
+      +header(order, orderQRCode, 'REPORT')
+
+      .row
+        div(class=order.machines.length === 1 ? 'col-6' : 'col-12')
+          +customer(order, customerQRCode)
+        div(class=order.machines.length === 1 ? 'col-6' : 'col-12')
+          if order.machines.length === 1
+            +machines(order, order.machines, 'Machine')
+
+      if order.machines.length > 1
+        +machines(order, order.machines)
+
+      if (order.accessories.length > 0)
+        +accessories(order)
+
+      if (order.parts.length > 0)
+        +parts(order)
+
+    section.sheet.padding-10mm
+      .card
+        .card-header Notes
+        .card-body
+          div!= markdown.render(order.notes || '')
+
+    //- section.sheet.padding-10mm
+    //-   code= JSON.stringify(order, null, 2)

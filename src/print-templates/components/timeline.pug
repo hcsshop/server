@@ -1,0 +1,19 @@
+mixin timeline(order, markdown, moment)
+  .card
+    .card-header Timeline
+    .card-body
+      ul.ant-timeline
+        each event, index in order.events.sort((a, b) => moment(a.start).valueOf() - moment(b.start).valueOf())
+          li.ant-timeline-item.ant-timeline-item-alternate
+            .ant-timeline-item-tail
+            .ant-timeline-item-head.ant-timeline-item-head-green
+            .ant-timeline-item.content(style='margin-left: 1em; position: relative; top: -5px')
+              span.ant-tag: strong= moment(event.start).format('dddd, MMMM Do YYYY hh:mm A')
+              if (event.timerData)
+                span.ant-tag.ant-tag-green: strong Duration: #{event.timerData.hours}h #{event.timerData.minutes}m #{event.timerData.seconds}s
+              if (event.end && !moment(event.start).isSame(moment(event.end)))
+                span.ant-tag: strong Ended: #{moment(event.end).format('dddd, MMMM Do YYYY hh:mm A')}
+
+              p!= markdown.render(event.message)
+
+  br

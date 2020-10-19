@@ -1,0 +1,20 @@
+mixin customer(order, customerQRCode, title='Customer')
+  .card
+    .card-header= title
+    .card-body
+      p
+        strong #{order.customerData.profile.name.display}
+        if (order.customerData.profile.company.isCompany)
+          br
+          em= order.customerData.profile.company.name
+        if (order.customerData.profile.phone.primary.number)
+          br
+          i.fa.fa-phone(style='margin-right: 0.25rem')
+          span= order.customerData.profile.phone.primary.number
+
+      p(style='position: absolute; top: 0.8in; right: 5px')
+        strong(style='margin-left: 10px; font-family: "Courier New", Courier, monospace')= order.customer.split('-')[0].toUpperCase()
+        br
+        img(src=customerQRCode, style='height: 1in')
+
+  br

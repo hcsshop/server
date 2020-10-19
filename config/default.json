@@ -1,0 +1,104 @@
+{
+  "host": "localhost",
+  "port": 3030,
+  "public": "../public/",
+
+  "shop": {
+    "admin": {
+      "name": "Admin",
+      "email": "admin@demo.onrepair.shop",
+      "password": "test",
+      "--comment": "This is for the initial creation of the admin account; change the password after logging in!"
+    }
+  },
+
+  "authLimiter": {
+    "threshold": 5,
+    "ttl": 120,
+    "errorMessage": "Too many authentication requests. Please try again later."
+  },
+
+  "apiLimiter": {
+    "threshold": 100,
+    "ttl": 60,
+    "errorMessage": "Too many API requests. Please try again later."
+  },
+
+  "telephony": {
+    "general": {
+      "defaultTelephonyService": "twilio"
+    }
+  },
+
+  "email": {
+    "general": {
+      "defaultEmailService": "mailgun"
+    }
+  },
+
+  "storage": {
+    "general": {
+      "defaultStorageType": "s3"
+    }
+  },
+
+  "paginate": {
+    "default": 10,
+    "max": 50
+  },
+
+  "authentication": {
+    "entity": "user",
+    "service": "users",
+    "secret": "",
+
+    "authStrategies": [
+      "jwt",
+      "local"
+    ],
+
+    "jwtOptions": {
+      "header": {
+        "typ": "access"
+      },
+
+      "audience": "https://yourdomain.com",
+      "issuer": "feathers",
+      "algorithm": "HS256",
+      "expiresIn": "1w"
+    },
+
+    "local": {
+      "usernameField": "email",
+      "passwordField": "password"
+    },
+
+    "oauth": {
+      "redirect": "/",
+      "google": {
+        "key": "<google oauth key>",
+        "secret": "<google oauth secret>",
+        "scope": [
+          "email",
+          "profile",
+          "openid"
+        ]
+      },
+
+      "facebook": {
+        "key": "<facebook oauth key>",
+        "secret": "<facebook oauth secret>"
+      },
+
+      "twitter": {
+        "key": "<twitter oauth key>",
+        "secret": "<twitter oauth secret>"
+      },
+
+      "github": {
+        "key": "<github oauth key>",
+        "secret": "<github oauth secret>"
+      }
+    }
+  }
+}

@@ -1,0 +1,62 @@
+include components/styles
+include components/header
+include components/customer
+include components/machines
+
+html
+  head
+    +styles
+
+  body.letter
+    - const conditionNames = ['Destroyed', 'Damaged', 'Fair', 'Good', 'Perfect']
+
+    each machine in order.machinesData
+      section.sheet.padding-10mm
+        +header(order, orderQRCode, 'TECHNICIAN WORKSHEET')
+
+        .row
+          .col-6
+            +customer(order, customerQRCode)
+          .col-6
+            +machines(order, [machine], 'Machine')
+
+        .card
+          .card-header Parts Replaced
+          .card-body
+            table.table.table-striped
+              thead
+                tr
+                  th Name
+                  th Description
+                  th Quantity
+                  th Unit Price
+                  th.text-right Approved
+              tbody
+                each i in Array.from(Array(3))
+                  tr
+                    td
+                    td
+                    td
+                    td
+                    td.text-right
+                      i.far.fa-square
+
+        br
+        .card
+          .card-header Problem Description
+          .card-body
+            span!= markdown.render(order.description)
+
+      section.sheet.padding-10mm
+        .text-center
+          p(style='margin-bottom: 0.1in')
+            strong
+              span TECHNICIAN WORKSHEET
+              span(style='font-family: "Courier New", Courier, monospace')  #{order.uuid.split('-')[0].toUpperCase()}
+
+        .card
+          .card-header Notes
+          .card-body(style='height: 85%')
+
+    //- section.sheet.padding-10mm
+    //-   code= JSON.stringify(order, null, 2)

@@ -1,0 +1,33 @@
+mixin parts(order)
+  .card
+    .card-header Parts Replaced
+    .card-body
+      table.table.table-striped
+        thead
+          tr
+            th Part
+            th Machine
+            th Quantity
+            th Unit Price
+            //- th.text-right Approved
+        tbody
+          each part in order.parts
+            - machine = order.machinesData.find(m => m.uuid = part.machine)
+            tr
+              td
+                span= part.name
+                br
+                small.text-muted(style='margin-left: 1em'): em= part.description
+              td
+                | #{machine.manufacturer} #{machine.model}
+                br
+                small.text-muted (Serial: #{machine.serial})
+              td.text-center= part.quantity
+              td.text-right $#{(part.price / 100).toFixed(2)}
+              //- td.text-right
+              //-   if part.approved
+              //-     i.far.fa-check-circle(style='font-size: 1.5rem; color: green')
+              //-   else
+              //-     i.far.fa-times-circle(style='font-size: 1.5rem; color: red')
+
+  br

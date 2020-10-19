@@ -1,0 +1,14 @@
+mixin accessories(order)
+  .card
+    .card-header
+      span Accessories
+      //- br
+      //- small: em Check all accessories that are present upon completion
+    .card-body
+      ul(style='display: flex; justify-content: space-between; width: 100%; padding: 0; list-style-type: none;')
+        each acc in order.accessories
+          li(style='display: inline-block; margin-right: 1rem;')
+            i.far.fa-square(style='margin-right: 0.5rem')
+            label.form-check-label: strong= acc
+
+  br

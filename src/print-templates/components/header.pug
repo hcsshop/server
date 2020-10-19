@@ -1,0 +1,16 @@
+mixin header(order, orderQRCode, title='ORDER')
+  if (logoURL)
+    img.logo(src=logoURL, style='max-height: 1.5in')
+
+  .text-right(style='float: right')
+    p(style='margin-bottom: 0.1in')
+      strong
+        span= title
+        span(style='font-family: "Courier New", Courier, monospace')  #{order.uuid.split('-')[0].toUpperCase()}
+
+    span.ant-tag(class=`${order.status !== 'pending' ? 'ant-tag-green' : 'ant-tag-magenta'}`) #{order.status.charAt(0).toUpperCase() + order.status.slice(1)}
+    br
+    img(src=orderQRCode, style='height: 1in')
+
+  div(style='clear:both')
+  hr

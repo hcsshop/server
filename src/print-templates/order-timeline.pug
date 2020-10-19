@@ -1,0 +1,18 @@
+include components/styles
+include components/header
+include components/customer
+include components/timeline
+include components/machines
+
+html
+  head
+    +styles
+
+  body.letter
+    section.sheet.padding-10mm
+      +header(order, orderQRCode, 'TIMELINE')
+      +customer(order, customerQRCode)
+      +machines(order, order.machines, order.machines.length !== 1 ? 'Machines' : 'Machine')
+
+    section.sheet.padding-10mm
+      +timeline(order, markdown, moment)

@@ -1,0 +1,54 @@
+mixin machines(order, machines, title='Machines')
+  - const conditionNames = ['Destroyed', 'Damaged', 'Fair', 'Good', 'Perfect']
+
+  .card
+    .card-header= title
+    .card-body
+      if machines.length === 1
+        - const machine = order.machinesData[0]
+        - const condition = order.intakeConditions.find(c => c.machine === machine.uuid)
+        - const intakePassword = intakePasswords.find(p => p.machine === machine.uuid)
+
+        p(style='position: absolute; top: 0.8in; right: 5px')
+          strong(style='margin-left: 10px; font-family: "Courier New", Courier, monospace')= machine.uuid.split('-')[0].toUpperCase()
+          br
+          if (intakePassword)
+            if (process.env.SYMMETRIC_SECRET)
+              strong Password:
+              br
+              img(src=intakePassword.qr, alt=intakePassword.encrypted, title=intakePassword.encrypt, style='height: 1in')
+            else
+              span Password:
+              span(style='padding: 5px; margin-left: 10px; font-family: "Courier New", Courier, monospace') #{intakePassword.value}
+
+        h6
+          strong #{machine.manufacturer} #{machine.model}
+          br
+          em (Serial: #{machine.serial})
+
+        .rating
+          span= `${condition.value > 0 ? '★' : '☆'}`
+          span= `${condition.value >= 1 ? '★' : '☆'}`
+          span= `${condition.value >= 2 ? '★' : '☆'}`
+          span= `${condition.value >= 3 ? '★' : '☆'}`
+          span= `${condition.value >= 4 ? '★' : '☆'}`
+
+        small: em.text-muted= conditionNames[condition.value || 2]
+      else
+        table.table.table-striped
+          thead
+            tr
+              th Manufacturer
+              th Model
+              th Serial
+              th Intake Condition
+          tbody
+            each machine in order.machinesData
+              - const condition = order.intakeConditions.find(i => i.machine === machine.uuid)
+              tr
+                td.text-center= machine.manufacturer
+                td.text-center= machine.model
+                td.text-center= machine.serial
+                td.text-center= (condition && conditionNames[condition]) || conditionNames[2]
+
+  br
