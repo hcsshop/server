@@ -8,12 +8,13 @@ const services = [
   require('./settings/settings.service'),
   require('./intuit/intuit-oauth.service'),
   require('./quickbooks/quickbooks.service'),
-  process.env.TWILIO_ENABLED === 'true' && require('./sms-twilio/sms-twilio.service'),
-  process.env.MAILGUN_ENABLED === 'true' && require('./email-mailgun/email-mailgun.service'),
-  process.env.S3_ENABLED === 'true' && require('./storage-s3/storage-s3.service'),
   require('./storage/storage.service'),
   require('./alexa/alexa.service')
 ]
+
+if (process.env.TWILIO_ENABLED === 'true') services.push(require('./sms-twilio/sms-twilio.service'))
+if (process.env.MAILGUN_ENABLED === 'true') services.push(require('./email-mailgun/email-mailgun.service'))
+if (process.env.S3_ENABLED === 'true') services.push(require('./storage-s3/storage-s3.service'))
 
 module.exports = function (app) {
   services.forEach(s => app.configure(s))
