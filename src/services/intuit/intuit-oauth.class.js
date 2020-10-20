@@ -7,21 +7,15 @@ exports.Intuit = class Intuit {
 
     // const { clientId, clientSecret, environment, redirectUri } = app.get('intuit')
 
-    let intuitSettings = {}
-
-    if (!app.get('intuit')) {
-      intuitSettings = {
-        clientId: process.env.INTUIT_CLIENT_ID,
-        clientSecret: process.env.INTUIT_CLIENT_SECRET,
-        redirectUri: process.env.INTUIT_REDIRECT_URI,
-        environment: process.env.INTUIT_ENVIRONMENT || 'sandbox',
-        logging: process.env.INTUIT_LOGGING === 'true'
-      }
-
-      app.set('intuit', intuitSettings)
-    } else {
-      intuitSettings = app.get('intuit')
+    const intuitSettings = {
+      clientId: process.env.INTUIT_CLIENT_ID,
+      clientSecret: process.env.INTUIT_CLIENT_SECRET,
+      redirectUri: process.env.INTUIT_REDIRECT_URI,
+      environment: process.env.INTUIT_ENVIRONMENT || 'sandbox',
+      logging: process.env.INTUIT_LOGGING === 'true'
     }
+
+    app.set('intuit', intuitSettings)
 
     this.oauth = new OAuthClient(intuitSettings)
     app.set('intuit-oauth', this.oauth)
