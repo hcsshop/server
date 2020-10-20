@@ -5,10 +5,10 @@ mixin parts(order)
       table.table.table-striped
         thead
           tr
-            th Part
+            th.text-left Part
             th Machine
             th Quantity
-            th Unit Price
+            th.text-right Unit Price
             //- th.text-right Approved
         tbody
           each part in order.parts
@@ -18,7 +18,7 @@ mixin parts(order)
                 span= part.name
                 br
                 small.text-muted(style='margin-left: 1em'): em= part.description
-              td
+              td.text-center
                 | #{machine.manufacturer} #{machine.model}
                 br
                 small.text-muted (Serial: #{machine.serial})
