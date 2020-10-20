@@ -178,6 +178,11 @@ exports.Quickbooks = class Quickbooks {
         }
       }
 
+      // For now, we need to assume that all phone numbers without country code are +1
+      if (customerData.phone.primary.number && customerData.phone.primary.number !== '' && customerData.phone.primary.number.charAt(0) === '+') customerData.phone.primary.number = `+1-${customerData.phone.primary.number}`
+      if (customerData.phone.mobile.number && customerData.phone.mobile.number !== '' && customerData.phone.mobile.number.charAt(0) === '+') customerData.phone.mobile.number = `+1-${customerData.phone.mobile.number}`
+      if (customerData.phone.fax.number && customerData.phone.fax.number && customerData.phone.fax.number.charAt(0) === '+') customerData.phone.fax.number = `+1-${customerData.phone.fax.number}`
+
       if (customer.CompanyName) {
         customerData.profile.company = {
           isCompany: true,
