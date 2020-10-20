@@ -119,7 +119,7 @@ exports.Intuit = class Intuit {
 
   async update (id, data, params) {
     try {
-      console.log(id, data)
+      // console.log(id, data)
       // this.oauth.setToken()
     } catch (err) {
       this.logger.error(err)

@@ -2,7 +2,6 @@ const { BadRequest } = '@feathersjs/errors'
 
 module.exports = function (app) {
   app.use(async (req, res, next) => {
-    console.log(req.url)
     if (!req.url.includes('/intuit-callback')) return next()
 
     const authResponse = await app.service('intuit').oauth.createToken(req.url)
